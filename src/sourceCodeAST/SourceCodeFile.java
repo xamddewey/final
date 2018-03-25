@@ -1,5 +1,6 @@
 package sourceCodeAST;
 
+import Softwares.SourceCodeFileMechanism;
 import org.eclipse.jdt.core.dom.*;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.JavaCore;
@@ -17,6 +18,15 @@ public class SourceCodeFile {
     private CompilationUnit rootASTNode = null; // 抽象语法树根节点
     private int totalLines = 0;                 // 文件总代码行数
     private long totalSpaces = 0;               // 文件占用的总空间
+    private SourceCodeFileMechanism mechanism = null;
+
+    public SourceCodeFileMechanism getMechanism() {
+        return mechanism;
+    }
+
+    public void setMechanism(SourceCodeFileMechanism mechanism) {
+        this.mechanism = mechanism;
+    }
 
     public SourceCodeFile(File fileHandle) {
         this.fileHandle = fileHandle;
@@ -141,7 +151,7 @@ public class SourceCodeFile {
             String line = reader.readLine();
             StringBuilder buffer = new StringBuilder();
             while (line != null) {
-                buffer.append(line + "\n");
+                buffer.append(line).append("\n");
                 totalLines += 1;
                 line = reader.readLine();
             }
